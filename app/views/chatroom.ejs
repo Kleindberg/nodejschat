@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title><%= room.title %> / NodeJS Chat</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel='stylesheet prefetch' href='/css/font-awesome.css'>
+  </head>
+  <body class="chatbg">    
+    <div class="container clearfix">
+      <div class="chat">
+        <div class="chat-header clearfix">
+          <img src="<%= user.picture %>" alt="avatar">
+          <div class="chat-about">
+            <div class="chat-room"><%= room.title %></div>
+            <div class="chat-num-users">0 в сети</div>
+          </div>
+          <i class="fa fa-users"></i>
+        </div>
+        
+        <div class="chat-history">
+          <ul></ul>
+        </div>
+        
+        <div class="chat-message clearfix">
+		  <div contenteditable id="message"></div>
+          <!-- button type="submit">Отправить</button -->
+        </div>
+      </div>
+      
+      <div class="controls">
+          <a href="/logout" class="logout-btn">Выйти</a>
+          <a href="/rooms" class="rooms-btn">Комнаты</a>
+      </div>
+
+      <div class="users-list">
+        <ul class="list"></ul>
+      </div>
+    </div>
+    <script src='/js/jquery.js'></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/main.js" defer></script>
+    <script>$(function(){app.chat('<%= room.id %>', '<%= user.username %>')});</script>
+  </body>
+</html>

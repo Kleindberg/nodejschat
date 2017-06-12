@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>NodeJS Chat</title>
+    <link rel="stylesheet" href="/css/style.css">
+  </head>
+  <body>  
+    <div class="login-page">
+      <div class="form">
+            <form action="/register" class="register-form" method="post" >
+              <input type="text" name="username" placeholder="Логин" autocomplete="off" />
+              <input type="email" name="email" placeholder="E-mail" autocomplete="off" />
+              <input type="password" name="password" placeholder="Пароль" autocomplete="off" />
+              <button type="submit">Регистрация</button>
+              <p class="message">Уже зарегистрированы? <a href="#">Войти</a></p>
+              <% if (errors != null && showRegisterForm != null && showRegisterForm === true) { %>
+                <% errors.forEach(function(err){ %>
+                  <p class="message error"><%= err %></p>
+                <% }); %>
+              <% } %>
+            </form>
+            <form action="/login" class="login-form" method="post">
+              <input type="text" name="username" placeholder="Логин" autocomplete="off" />
+              <input type="password" name="password" placeholder="Пароль" autocomplete="off" />
+              <button type="submit">Войти</button>
+              <p class="message">Нет аккаунта? <a href="#">Зарегистрироваться</a></p>
+              <% if (errors != null && showRegisterForm == null) { %>
+                <% errors.forEach(function(err){ %>
+                  <p class="message error"><%= err %></p>
+                <% }); %>
+              <% } if (success != null && showRegisterForm == null) { %>
+                <p class="message success"><%= success %></p>
+              <% } %>
+            </form>
+    </div>
+    </div>
+    <script src='/js/jquery.js'></script>
+    <% if(showRegisterForm != null && showRegisterForm === true) { %>
+        <script>
+          $('.register-form').show(); $('.login-form, .social-buttons, .form-line').hide();
+        </script>
+    <% } %>
+    <script>
+        $('.message a').click(function(){
+            $('form, .social-buttons, .form-line').animate({height: "toggle", opacity: "toggle"}, "slow");
+          });
+    </script>
+  </body>
+</html>
