@@ -5,6 +5,10 @@
   "scripts": {
     "start": "node server.js"
   },
+  "repository": {
+    "url": "git+https://github.com/Kleindberg/nodejschat.git",
+    "type": "git"
+  },
   "author": "Bogdan Gerasymenko <bogdan@at.ua> (https://bogdan.ml)",
   "license": "MIT",
   "dependencies": {
