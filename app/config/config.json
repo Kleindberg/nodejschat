@@ -1,9 +1,9 @@
 {
 	"db": {
-		"username": "",
-		"password": "",
-		"host": "127.0.0.1",
-		"port": "27017",
+		"username": "test",
+		"password": "test",
+		"host": "ds125262.mlab.com",
+		"port": "25262",
 		"name": "nodechat"
 	},
 	"sessionSecret": "sessiontest",
