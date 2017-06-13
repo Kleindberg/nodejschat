@@ -30,7 +30,7 @@
       
       <div class="controls">
           <a href="/logout" class="logout-btn">Выйти</a>
-          <a href="/rooms" class="rooms-btn">Комнаты</a>
+          <a onclick="return confirmReset();" class="rooms-btn">Комнаты</a>
       </div>
 
       <div class="users-list">
@@ -40,6 +40,18 @@
     <script src='/js/jquery.js'></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/main.js" defer></script>
-    <script>$(function(){app.chat('<%= room.id %>', '<%= user.username %>')});</script>
+    <script>$(function(){app.chat('<%= room.id %>', '<%= user.username %>')});
+function confirmReset() {
+ var r = confirm('Вы точно хотите покинуть комнату?');
+ var url = window.location.pathname;
+ var pathArray = url.split( '/' );
+ var host = pathArray[1];
+ var newHost = '/rooms';
+ if (r == true) {
+    window.location = host+newHost;
+ }
+ return false;
+}
+    </script>
   </body>
 </html>
