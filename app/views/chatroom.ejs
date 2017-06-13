@@ -5,6 +5,7 @@
     <title><%= room.title %> / NodeJS Chat</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel='stylesheet prefetch' href='/css/font-awesome.css'>
+	<link rel="stylesheet" href="/css/emojionearea.css">
   </head>
   <body class="chatbg">    
     <div class="container clearfix">
@@ -23,14 +24,14 @@
         </div>
         
         <div class="chat-message clearfix">
-		  <div contenteditable id="message"></div>
-          <!-- button type="submit">Отправить</button -->
+		  <div contenteditable id="message"></div>		  
+          <button type="submit">Отправить</button>
         </div>
       </div>
       
       <div class="controls">
-          <a href="/logout" class="logout-btn">Выйти</a>
-          <a onclick="return confirmReset();" class="rooms-btn">Комнаты</a>
+          <a href="/logout" class="logout-btn"><i class="fa fa-times-circle" aria-hidden="true"></i> Выйти</a>
+          <a onclick="return confirmReset();" class="rooms-btn"><i class="fa fa-arrow-left" aria-hidden="true"></i> Комнаты</a>
       </div>
 
       <div class="users-list">
@@ -40,14 +41,31 @@
     <script src='/js/jquery.js'></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/main.js" defer></script>
-    <script>$(function(){app.chat('<%= room.id %>', '<%= user.username %>')});
-function confirmReset() {
- var r = confirm('Вы точно хотите покинуть комнату?');
- if (r == true) {
-    window.location = "/rooms";
- }
- return false;
-}
+	<script src="/js/emojionearea.js"></script>
+    <script>	
+	$(document).ready(function() {
+	
+		$(function(){app.chat('<%= room.id %>', '<%= user.username %>')});
+	
+		function confirmReset() {
+		 var r = confirm('Вы точно хотите покинуть комнату?');
+		 if (r == true) {
+			window.location = "/rooms";
+		 }
+		 return false;
+		}
+		
+		$("#message").emojioneArea({
+			pickerPosition: "top",
+			tonesStyle: "radio",
+			spellcheck : true,
+			autocomplete : "on",
+			autocorrect : "on",
+			autocapitalize : "on",
+			placeholder : "Ваше сообщение..."
+		});
+		
+	});
     </script>
   </body>
 </html>

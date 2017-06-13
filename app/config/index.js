@@ -1,7 +1,7 @@
 'use strict';
 
 var init = function() {
-	// Считываем настройки из config.json
+	// Настройки production на сервере
     if (process.env.NODE_ENV === 'production') {
         var redisURI = require('url').parse(process.env.REDIS_URL);
         var redisPassword = redisURI.auth.split(':')[1];
@@ -21,6 +21,7 @@ var init = function() {
             }
         }
     } else {
+		// Если запущено на localhost
         return require('./config.json');
     }
 }

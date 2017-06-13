@@ -1,4 +1,9 @@
 'use strict';
+
+// Звуковое уведомление
+var notify = new Audio();
+	notify.src = '/notify.mp3';
+
 var app = {
 	rooms: function() {
 		var socket = io('/rooms', {
@@ -34,6 +39,7 @@ var app = {
 		// Подключаемся к выбранной комнате
 		socket.on('connect', function() {
 			socket.emit('join', roomId);
+			
 			// Обновляем список пользователей в комнате
 			socket.on('updateUsersList', function(users, clear) {
 				$('.container p.message').remove();
@@ -43,6 +49,7 @@ var app = {
 					app.helpers.updateUsersList(users, clear);
 				}
 			});
+			
 			// Когда пользователь отправляет сообщение создаем событие newMessage
 			$('#message').keypress(function(e) {
 				// По нажатию Enter в поле ввода текста в чате
@@ -61,6 +68,23 @@ var app = {
 					return false;
 				}
 			});
+			
+			// Кнопка отправки сообщения
+			$(".chat-message button").on('click', function(e) {
+			  var text = $('#message').html();
+			  if(text !== '') {
+				var message = { 
+				  content: text, 
+				  username: username,
+				  date: Date.now()
+				};
+				socket.emit('newMessage', roomId, message);
+				$('.emojionearea-editor').empty();
+				$('#message').empty();
+				app.helpers.addMessage(message);
+			  }
+			});
+			
 			// Если пользователь покидает комнату, убираем его из списка
 			socket.on('removeUser', function(userId) {
 				$('li#user-' + userId).remove();
@@ -68,7 +92,7 @@ var app = {
 			});
 			// Добавляем новое сообщение
 			socket.on('addMessage', function(message) {
-				app.helpers.addMessage(message);
+				app.helpers.addMessage(message);				
 			});
 		});
 	},
@@ -113,6 +137,8 @@ var app = {
 			} else {
 				$('.users-list ul').prepend(html);
 			}
+			var newuser = `<li><div class="system-info"><i class="fa fa-info-circle" aria-hidden="true"></i> К нам присоединился <b>${user.username}</b></div></li>`;
+			$(newuser).hide().appendTo('.chat-history ul').slideDown(200);
 			this.updateNumOfUsers();
 		},
 		// Отправляет сообщение в чат
@@ -127,7 +153,12 @@ var app = {
                     </div>
                     <div class="message my-message" dir="auto">${message.content}</div>
                   </li>`;
-			$(html).hide().appendTo('.chat-history ul').slideDown(200);
+			$(html).hide().appendTo('.chat-history ul').slideDown(200);			
+			
+			// Звуковое уведомление
+			notify.currentTime = 0;
+			notify.play();
+			
 			// Прокручиваем экран вниз
 			$(".chat-history").animate({
 				scrollTop: $('.chat-history')[0].scrollHeight

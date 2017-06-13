@@ -1,12 +1,12 @@
 {
 	"db": {
-		"username": "test",
-		"password": "test",
-		"host": "ds125262.mlab.com",
-		"port": "25262",
+		"username": "",
+		"password": "",
+		"host": "127.0.0.1",
+		"port": "27017",
 		"name": "nodechat"
 	},
-	"sessionSecret": "sessiontest",
+	"sessionSecret": "09fdcab8367aa351440756bb80b765da",
 	"redis": {
 		"host": "127.0.0.1",
 		"port": 6379,
