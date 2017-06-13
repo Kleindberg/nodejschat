@@ -7,11 +7,11 @@ var init = function() {
         var redisPassword = redisURI.auth.split(':')[1];
         return {
             db: {
-                username: process.env.dbUsername,
-                password: process.env.dbPassword,
-                host: process.env.dbHost,
-                port: process.env.dbPort,
-                name: process.env.dbName
+                username: 'heroku_dm91w47r',
+                password: 'kbq3ejjul5oetu08mciuk6uuu0',
+                host: 'ds123662.mlab.com',
+                port: 23662,
+                name: 'heroku_dm91w47r'
             },
             sessionSecret: process.env.sessionSecret,            
             redis: {
