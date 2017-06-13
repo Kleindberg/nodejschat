@@ -42,7 +42,7 @@ UserSchema.pre('save', function(next) {
 
     // Если не задана аватарка, выбираем фото по-умолчанию
     if (!user.picture) {
-        user.picture = gravatar.url(user.email, {s: '200', r: 'pg', d: '404'});;
+        user.picture = gravatar.url(user.email, {s: '200', r: 'pg', d: 'monsterid'});;
     }
 
     // хэшируем пароль если он новый или был изменён
