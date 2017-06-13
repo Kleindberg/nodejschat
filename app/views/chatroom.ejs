@@ -43,18 +43,15 @@
     <script src="/js/main.js" defer></script>
 	<script src="/js/emojionearea.js"></script>
     <script>	
-	$(document).ready(function() {
-	
-		$(function(){app.chat('<%= room.id %>', '<%= user.username %>')});
-	
-		function confirmReset() {
-		 var r = confirm('Вы точно хотите покинуть комнату?');
-		 if (r == true) {
+	$(function(){app.chat('<%= room.id %>', '<%= user.username %>')});
+	function confirmReset() {
+		var r = confirm('Вы точно хотите покинуть комнату?');
+		if (r == true) {
 			window.location = "/rooms";
-		 }
-		 return false;
 		}
-		
+		return false;
+	}
+	$(document).ready(function() {
 		$("#message").emojioneArea({
 			pickerPosition: "top",
 			tonesStyle: "radio",
@@ -64,7 +61,6 @@
 			autocapitalize : "on",
 			placeholder : "Ваше сообщение..."
 		});
-		
 	});
     </script>
   </body>
